@@ -1,5 +1,5 @@
 import { singleton } from "tsyringe";
-import logger from "../utility/logger";
+
 import { BaseLoaderService } from "./base-loader.service";
 import { DatabaseService } from "./database.service";
 

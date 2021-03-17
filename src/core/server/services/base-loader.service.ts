@@ -1,5 +1,4 @@
 import { singleton } from "tsyringe";
-import logger from "../utility/logger";
 
 @singleton()
 export class BaseLoaderService {
