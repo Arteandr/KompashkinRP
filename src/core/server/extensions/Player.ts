@@ -1,5 +1,5 @@
 import * as alt from "alt-server";
-import { Character } from "../shared/interfaces/Character";
+import { Character } from "../../shared/interfaces/Character";
 
 declare module "alt-server" {
     export interface Player {
