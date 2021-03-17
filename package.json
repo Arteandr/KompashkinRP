@@ -1,0 +1,41 @@
+{
+  "name": "dm",
+  "version": "0.0.1",
+  "description": "Dm server by snak1o,hwndrer,jeffreyz,killaziwe,alinoosik",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run clean && tsc && npm run copy",
+    "copy": "copyfiles \"src/**/*\" --exclude=**/*.ts --up 1 ./resources",
+    "clean": "rimraf resources/**/*.js resources/**/*.wasm",
+    "update": "altv-pkg d release && git pull origin master && npm install && git submodule update --force --init --recursive --remote",
+    "windows": "npm run build && altv-server.exe",
+    "linux": "npm run build && ./start.sh",
+    "watch-windows": "tsc-watch --onSuccess \"npm run watch-handle-windows\"",
+    "watch-linux": "tsc-watch --onSuccess \"npm run watch-handle-linux\"",
+    "watch-handle-windows": "npm run copy && altv-server.exe",
+    "watch-handle-linux": "npm run copy && ./start.sh"
+  },
+  "author": "hwndrer \u001b[23~& snak1o",
+  "license": "ISC",
+  "devDependencies": {
+    "@altv/types-client": "^1.5.3",
+    "@altv/types-natives": "^1.1.0",
+    "@altv/types-server": "^1.7.3",
+    "@altv/types-webview": "^1.0.2",
+    "@types/node": "^14.14.35",
+    "copyfiles": "^2.4.1",
+    "tsc-watch": "^4.2.9",
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "@assemblyscript/loader": "^0.18.15",
+    "altv-pkg": "^1.0.3",
+    "chalk": "^4.1.0",
+    "dotenv": "^8.2.0",
+    "mongodb": "^3.6.5",
+    "reflect-metadata": "^0.1.13",
+    "simplymongo": "^2.1.1",
+    "tsyringe": "^4.4.0"
+  },
+  "type": "module"
+}
