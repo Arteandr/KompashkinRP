@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="container" v-if="!registering">
+      <div class="auth-container">
+        <img src="./snake.svg" class="logo" alt="snake">
+        <div action="#" class="form">
+          <div class="input-container">
+            <input type="text" placeholder="Логин" @keydown.space.prevent v-model="login" />
+            <span class="errorMessage" v-if="error.login">{{error.login}}</span>
+          </div>
+          <div class="input-container">
+            <input type="password" placeholder="Пароль" @keydown.space.prevent v-model="password" />
+            <span class="errorMessage" v-if="error.password">{{error.password}}</span>
+          </div>
+          <button class="outline-btn" @click="processRegistration(false)">авторизация</button>
+        </div>
+        <span @click="toggleMode" class="link">К регистрации <img src="./export.svg" alt="link" /></span>
+      </div>
+    </div>
+
+    <div class="container" v-if="registering">
+      <div class="auth-container">
+        <img src="./snake.svg" class="logo" alt="snake" />
+        <div action="#" class="form">
+          <div class="input-container">
+            <input type="text" placeholder="Логин" @keydown.space.prevent v-model="login" />
+            <span class="errorMessage" v-if="error.login">{{error.login}}</span>
+          </div>
+          <div class="input-container">
+            <input type="password" placeholder="Пароль" @keydown.space.prevent v-model="rPassword" />
+            <span class="errorMessage" v-if="error.rPassword">{{error.rPassword}}</span>
+          </div>
+          <div class="input-container">
+            <input type="password" placeholder="Повтор пароля" @keydown.space.prevent v-model="rPassword2" />
+            <span class="errorMessage" v-if="error.rPassword2">{{error.rPassword2}}</span>
+          </div>
+          <button class="outline-btn" @click="processRegistration(true)">регистрация</button>
+        </div>
+        <span @click="toggleMode" class="link">К авторизации <img src="./export.svg" alt="link" /></span>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

@@ -29,12 +29,15 @@
   },
   "dependencies": {
     "@assemblyscript/loader": "^0.18.15",
+    "@types/sjcl": "^1.0.29",
     "altv-pkg": "^1.0.3",
     "chalk": "^4.1.0",
     "dotenv": "^8.2.0",
     "mongodb": "^3.6.5",
     "reflect-metadata": "^0.1.13",
+    "rxjs": "^6.6.6",
     "simplymongo": "^2.1.1",
+    "sjcl": "^1.0.8",
     "tsyringe": "^4.4.0"
   },
   "type": "module"

@@ -1,5 +1,9 @@
 import * as alt from "alt-server";
 import { Character } from "../../shared/interfaces/Character";
+import { Account } from "../interface/Account";
+
+import dataUpdater from './playerFunctions/dataUpdate';
+import safe from './playerFunctions/safe';
 
 declare module "alt-server" {
     export interface Player {
@@ -35,4 +39,9 @@ declare module "alt-server" {
         lastEnteredVehicleID: number;
         lastVehicleID: number;
     }
+}
+
+export const playerFuncs = {
+    dataUpdater,
+    safe
 }

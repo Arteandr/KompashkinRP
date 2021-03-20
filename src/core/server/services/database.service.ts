@@ -1,6 +1,7 @@
 import * as sm from "simplymongo";
-import { singleton } from "tsyringe";
+import { container, singleton } from "tsyringe";
 import logger from "../utility/logger";
+import LoaderService from "./loader.service";
 
 @singleton()
 export class DatabaseService {
@@ -15,7 +16,6 @@ export class DatabaseService {
         collections: [
             'accounts',
             'characters',
-
         ]
     };
 
@@ -31,14 +31,26 @@ export class DatabaseService {
      * 
      * @returns {void}
      */
-    public connect(): void {
+    public async connect(): Promise<void> {
         if (this.connected || !this.config.collections.length) return;
 
+        sm.onReady(this.handlerReady);
+
         new sm.Database(this.config.mongoURL, this.config.dbName, this.config.collections);
-        sm.onReady((e) => {
-            if (e) return logger.error(e);
-            logger.passed(`База данных успешно подключена`)
-        })
     }
 
+    /**
+     * Обработка подключения
+     * 
+     * @param {any} err
+     * @private
+     * @returns {void}
+     */
+    private async handlerReady(err: any): Promise<void> {
+        if (err) return logger.error(`Ошибка при подключении к базе данных: ${err}`);
+        this.connected = true;
+        logger.passed(`База данных успешно подключена!`);
+        const loader = container.resolve(LoaderService);
+        await loader.loadAll();
+    }
 }

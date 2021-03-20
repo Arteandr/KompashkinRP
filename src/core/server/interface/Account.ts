@@ -1,4 +1,5 @@
 import { Permissions } from "../../shared/enums/permissions";
+import { Character } from "../../shared/interfaces/Character";
 
 /**
  * Используется для хранения информации о аккаунте
@@ -7,12 +8,16 @@ import { Permissions } from "../../shared/enums/permissions";
  * @interface Account
  */
 export interface Account {
-    _id: any;
-    discord: string;
+    _id?: any;
+    login: string;
+    password: string;
+    email?: string;
+    discord?: string;
     ips: Array<string>;
     hardware: Array<string>;
-    lastLogin: number;
     permissionLevel: Permissions;
     banned: boolean;
-    reason: string;
+    reason?: string;
+    registerDate: Date;
+    characters: Character[];
 }

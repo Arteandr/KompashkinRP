@@ -1,18 +1,29 @@
 import { singleton } from "tsyringe";
 
-import { BaseLoaderService } from "./base-loader.service";
-import { DatabaseService } from "./database.service";
 
 @singleton()
-export class LoaderService extends BaseLoaderService {
-    constructor(
-        private readonly databaseService: DatabaseService
-    ) {
-        super();
+export default class LoaderService {
+    /**
+     * Загрузка всех модулей
+     */
+    public async loadAll(): Promise<void> {
+        await this.loadEvents();
     }
 
-    protected startLoading() {
-        this.databaseService.connect();
+    /**
+     * Загрузка всех эвентов
+     * @return {void}
+     */
+    private async loadEvents(): Promise<void> {
+        import("../events/playerConnect");
+        import("../events/auth");
     }
 
+    /**
+     * Загрузка всех сервисов
+     * @returns {void}
+     */
+    private loadServices(): void {
+
+    }
 }
