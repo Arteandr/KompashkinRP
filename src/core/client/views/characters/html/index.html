@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div id="app">
+    <div class="container" v-cloak>
+        <div v-for="index in 3" class="card" v-bind:class="{'first': index === 1,'second': index === 2, 'third': index === 3}">
+                  <div class="card-bg" v-if="characters[index-1]">
+                    <div class="card-container">
+                      <div class="nick">{{characters[index-1].firstName + " " + characters[index-1].lastName}}</div>
+                      <ul>
+                        <li><span class="list-item">Уровень</span><span class="list-item">{{characters[index-1].level}}</span></li>
+                        <li><span class="list-item">VIP</span><span class="list-item">{{characters[index-1].vip}}</span></li>
+                        <li><span class="list-item">Отыграно</span><span class="list-item">{{characters[index-1].playedTime}}ч.</span></li>
+                
+                        <li><span class="list-item">Наличные</span><span class="list-item">${{characters[index-1].cash}}</span></li>
+                        <li><span class="list-item">Банк</span><span class="list-item">${{characters[index-1].bank}}</span></li>
+                        <li><span class="list-item">Организация</span><span class="list-item">{{characters[index-1].fraction}}</span></li>
+                      </ul>
+                      <div class="btn-pos">
+                        <span class="btn">выбрать</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-bg disabled" v-else>
+                    <div class="card-container">
+                      <div class="disabled-card">
+                        <img src="./padlock.svg" alt="" />
+                      </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+  </div>
+
+<script src="../../js/vue.js"></script>
+<script src="app.js"></script>
+</body>
+
+</html>

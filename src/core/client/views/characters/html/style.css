@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  font-family: "Nunito", sans-serif;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+ul,
+li {
+  list-style: none;
+}
+#app {
+  background: url("./iu1.jpg") no-repeat center;
+  background-size: cover;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: rgb(27, 26, 26, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card {
+  width: 25%;
+  height: 70%;
+  transform: skew(-8deg);
+  position: relative;
+  transition: ease-in .3s;
+}
+.first {
+  background: url("./11.jpg") no-repeat center;
+  background-size: cover;
+}
+.second {
+  background: url("./121.jpg") no-repeat center;
+  background-size: cover;
+}
+.third {
+  background: url("./9.png") no-repeat center;
+  background-size: cover;
+}
+.card-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(130, 95, 200, 0.85), rgba(189, 122, 227, 0.85));
+}
+.card-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card-container ul {
+  margin: 0 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.card-container ul li {
+  width: 33%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+.nick {
+  font-weight: 400;
+  color: #fcebff;
+  transform: skew(8deg);
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  font-size: 25px;
+}
+
+.disabled .card-container {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  transform: skew(8deg);
+  justify-content: unset;
+}
+.list-item {
+  color: rgb(69, 14, 117);
+  line-height: 30px;
+  font-family: "Comfortaa", cursive;
+  font-size: 15px;
+}
+
+.disabled-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.card:not(:last-child) {
+  margin-right: 35px;
+}
+.btn-pos {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.btn {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 15px 25px 15px;
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  padding: 7px 0;
+  background: rgb(132, 97, 201);
+  color: rgb(208, 201, 214);
+  cursor: pointer;
+}

@@ -9,6 +9,7 @@ import { Character } from "../../shared/interfaces/Character";
  */
 export interface Account {
     _id?: any;
+    social: number;
     login: string;
     password: string;
     email?: string;

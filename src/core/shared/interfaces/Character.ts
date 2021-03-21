@@ -7,6 +7,10 @@ import { Item } from "./Item";
 export interface Character {
     _id?: any;
     account_id: any;
+    level: number;
+    vip: string;
+    playedTime: number;
+    fraction: string;
     pos: Vector3;
     firstName: string;
     lastName: string;

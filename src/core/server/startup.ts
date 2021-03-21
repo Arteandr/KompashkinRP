@@ -3,7 +3,6 @@ import env from 'dotenv';
 import "reflect-metadata";
 import { container } from "tsyringe";
 import { DatabaseService } from "./services/database.service";
-import { LoginService } from "./services/login.service";
 
 env.config();
 

@@ -4,8 +4,10 @@ import { singleton } from "tsyringe";
 import { Events } from "../../shared/enums/events";
 import { Permissions } from "../../shared/enums/permissions";
 import { encryptPassword, verifyPassword } from "../extensions/encryption";
+import { playerFuncs } from "../extensions/Player";
 import { Account } from "../interface/Account";
 import logger from "../utility/logger";
+import { goToCharacterSelect } from "../views/characters";
 
 const db: sm.Database = sm.getDatabase();
 
@@ -24,17 +26,28 @@ export class LoginService {
             alt.emitClient(player, Events.PLAYER_ACCOUNT_ERROR, `Вы ввели неверные данные.`);
             return;
         }
+
+        await playerFuncs.dataUpdater.account(player, accountData);
+        goToCharacterSelect(player);
     }
 
     async register(player: alt.Player, username: string, password: string) {
         let accountData: Partial<Account> | null = await db.fetchData<Account>('login', username, 'accounts');
+        let social: Partial<Account> | null = await db.fetchData<Account>('social', parseInt(player.socialID), 'accounts');
 
-        if (accountData !== null) {
-            alt.emitClient(player, Events.PLAYER_ACCOUNT_ERROR, `Указаный логин уже используется`);
+        if (social !== null) {
+            alt.emitClient(player, Events.PLAYER_ACCOUNT_ERROR, `Ваш Social Club уже используется.`);
             return;
         }
 
+        if (accountData !== null) {
+            alt.emitClient(player, Events.PLAYER_ACCOUNT_ERROR, `Указаный логин уже используется.`);
+            return;
+        }
+
+
         const data: Account = {
+            social: parseInt(player.socialID),
             login: username,
             password: encryptPassword(password),
             ips: [player.ip],
@@ -46,6 +59,6 @@ export class LoginService {
         }
 
         const dbData = await db.insertData<Account>(data, `accounts`, true);
-        logger.log("Acount successfully created");
+
     }
 }
