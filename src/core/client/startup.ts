@@ -10,3 +10,4 @@ import "./extensions/view"
 // Views
 import "./views/login/login";
 import "./views/characters/characters"
+import "./views//creator/creator"

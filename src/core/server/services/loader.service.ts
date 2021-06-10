@@ -17,6 +17,7 @@ export default class LoaderService {
     private async loadEvents(): Promise<void> {
         import("../events/playerConnect");
         import("../events/auth");
+        import("../events/creator");
     }
 
     /**

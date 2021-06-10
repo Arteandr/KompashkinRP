@@ -11,7 +11,5 @@ export enum Events {
     SYSTEM_META_CHANGED = "meta:changed",
 
 
-    // View 
-    VIEW_SHOW_CHARACTERS_MENU = "view:show_characters_menu",
-    VIEW_CHARACTERS_SHOW = "view:characters_show",
+
 };

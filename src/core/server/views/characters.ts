@@ -1,6 +1,7 @@
 import * as alt from "alt-server";
 import * as sm from "simplymongo";
 import { Events } from "../../shared/enums/events";
+import { View_Events_Characters, View_Events_Creator } from "../../shared/enums/views";
 import { Character } from "../../shared/interfaces/Character";
 import { DEFAULT_CONFIG } from "../config/main";
 import { playerFuncs } from "../extensions/Player";
@@ -21,15 +22,13 @@ export async function goToCharacterSelect(player: alt.Player): Promise<void> {
         'characters'
     );
 
-    console.log(characters);
-
     player.pendingCharacterSelect = true;
 
-    // if (characters.length <= 0) {
-    //     console.log("characters not found :c");
-    //     // handleNewCharacter(player);
-    //     return;
-    // }
+    if (characters.length <= 0) {
+        console.log("characters not found :c");
+        handleNewCharacter(player);
+        return;
+    }
 
     const { x, y, z } = DEFAULT_CONFIG.CHARACTER_SELECT_POS;
 
@@ -38,7 +37,28 @@ export async function goToCharacterSelect(player: alt.Player): Promise<void> {
     playerFuncs.safe.setPosition(player, x, y, z);
 
     alt.setTimeout(() => {
-        alt.emitClient(player, Events.VIEW_CHARACTERS_SHOW, characters);
+        alt.emitClient(player, View_Events_Characters.Show, characters);
     }, 1000);
+}
+
+
+export function handleNewCharacter(player: alt.Player) {
+    if (player.currentCharacters && player.currentCharacters.length >= DEFAULT_CONFIG.PLAYER_MAX_CHARACTER_SLOTS) return;
+
+    let totalCharacters = 0;
+    if (player.currentCharacters) {
+        totalCharacters = player.currentCharacters.length;
+    }
+
+    const pos = { ...DEFAULT_CONFIG.CHARACTER_CREATOR_POS };
+
+    player.rot = { ...DEFAULT_CONFIG.CHARACTER_CREATOR_ROT } as alt.Vector3;
+    playerFuncs.safe.setPosition(player, pos.x, pos.y, pos.z);
+    alt.emitClient(player, View_Events_Characters.Done);
+
+    alt.setTimeout(() => {
+        alt.emitClient(player, View_Events_Creator.Show); // _oldCharacterData, _noDiscard, _noName
+    }, 1000);
+
 }
 

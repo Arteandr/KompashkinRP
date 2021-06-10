@@ -10,10 +10,7 @@ export interface Appearance {
     hair: number;
     hairColor1: number;
     hairColor2: number;
-    hairOverlay: {
-        overlay: string;
-        collection: string;
-    };
+    hairOverlay: { overlay: string; collection: string };
     facialHair: number;
     facialHairColor1: number;
     facialHairOpacity: number;
@@ -24,7 +21,6 @@ export interface Appearance {
     opacityOverlays: AppearanceInfo[];
     colorOverlays: ColorInfo[];
 }
-
 
 export interface ColorInfo {
     id: number;
